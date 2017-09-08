@@ -16,10 +16,7 @@ function addDatos() {
 function cleanDatos() {
     localStorage.clear();
     $('#data').empty();
-    $("#clave").val('');
-    $("#valor").val('');
 }
-
 
 function recover() {
     for (let clave in localStorage) {
