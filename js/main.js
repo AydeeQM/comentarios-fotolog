@@ -1,42 +1,29 @@
-$(document).ready(function(){
+$(document).ready(function () {
     recover();
 });
 
 function addDatos() {
-    localStorage.nombre = $('#clave').val();
-    localStorage.valor = $('#valor').val();
+    localStorage[$('#clave').val()] = $('#valor').val();
 
-    motrar_Data();
+    $('#data').empty();
+
+    recover();
 
     $("#clave").val('');
     $("#valor").val('');
 };
 
-$(document).ready(function () {
-
-    $('#clearmot').click(function () {
-        $('#data').html("Limpiada vista. Los datos permanecen");
-    });
-});
-
-function borrarTodo() {
+function cleanDatos() {
     localStorage.clear();
-    addDatos();
-}
-
-function motrar_Data() {
-    let dato_nombre = localStorage.nombre
-    let dato_commit = localStorage.valor
-    $('#data').append("<div class ='form-group lista'><h3>" + dato_nombre + "</h3><p>" + dato_commit + "</p></div>");
+    $('#data').empty();
+    $("#clave").val('');
+    $("#valor").val('');
 }
 
 
 function recover() {
-    for (let i = 0; i < localStorage.length; i++) {
-        let dato_nombre = localStorage.key(i);
-        let dato_commit = localStorage.getItem(dato_nombre);
-        $('#data').append("<div class ='form-group lista'><h3>" + dato_nombre + "</h3><p>" + dato_commit+ "</p></div>");
+    for (let clave in localStorage) {
+        let dato_commit = localStorage.getItem(clave);
+        $('#data').append("<div class ='form-group lista'><h3>" + clave + "</h3><p>" + dato_commit + "</p></div>");
     }
 }
-
-
