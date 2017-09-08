@@ -1,14 +1,16 @@
+$(document).ready(function(){
+    recover();
+});
+
 function addDatos() {
     localStorage.nombre = $('#clave').val();
     localStorage.valor = $('#valor').val();
 
-    if ((localStorage.nombre != undefined) && (localStorage.valor != undefined)) {
-        $('#data').append("<div class ='form-group lista'><h3>" + localStorage.nombre + "</h3><p>" + localStorage.valor + "</p></div>")
-    }
+    motrar_Data();
+
     $("#clave").val('');
     $("#valor").val('');
 };
-
 
 $(document).ready(function () {
 
@@ -22,13 +24,19 @@ function borrarTodo() {
     addDatos();
 }
 
-$(document).ready(function () {
-    $("#contact-form").submit(function (e) {
-        e.preventDefault();
-        //Asignamos el valor al objeto SessionStorage
-        localStorage.setItem('nombre', $('#clave').val());
-        //Asignamos el valor al objeto localStorage
-        localStorage.setItem('valor', $('#valor').val());
-        window.location = 'index.html';
-    });
-});
+function motrar_Data() {
+    let dato_nombre = localStorage.nombre
+    let dato_commit = localStorage.valor
+    $('#data').append("<div class ='form-group lista'><h3>" + dato_nombre + "</h3><p>" + dato_commit + "</p></div>");
+}
+
+
+function recover() {
+    for (let i = 0; i < localStorage.length; i++) {
+        let dato_nombre = localStorage.key(i);
+        let dato_commit = localStorage.getItem(dato_nombre);
+        $('#data').append("<div class ='form-group lista'><h3>" + dato_nombre + "</h3><p>" + dato_commit+ "</p></div>");
+    }
+}
+
+
